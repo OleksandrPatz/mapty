@@ -199,7 +199,7 @@ class App {
 
     // render workout on a list
     this._renderWorkout(workout);
-    
+
     // Hide form + clear input fields
     this._hideForm();
 
@@ -323,10 +323,14 @@ class App {
     const workoutEl = e.target.closest('.workout');
 
     if (!workoutEl) return;
+
     // to select clicked workout.
     const workout = this.#workouts.find(
       work => work.id === workoutEl.dataset.id
     );
+
+    // Check if workout is defined before accessing its properties
+    if (!workout || !workout.coords) return;
 
     // move map to the target.
     this.#map.setView(workout.coords, this.#mapZoomLevel, {
